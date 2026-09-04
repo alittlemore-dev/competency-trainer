@@ -62,19 +62,19 @@ class TestPytestWorkerCount:
 class TestWorkerDatabaseName:
     def test_master_worker_uses_base_database_name(self) -> None:
         assert build_worker_database_name(
-            base_database_name="my_site_database_test", worker_id="master"
-        ) == ("my_site_database_test")
+            base_database_name="competency_trainer_database_test", worker_id="master"
+        ) == ("competency_trainer_database_test")
 
     def test_xdist_worker_uses_suffix(self) -> None:
         assert build_worker_database_name(
-            base_database_name="my_site_database_test", worker_id="gw0"
-        ) == ("my_site_database_test_gw0")
+            base_database_name="competency_trainer_database_test", worker_id="gw0"
+        ) == ("competency_trainer_database_test_gw0")
 
     @pytest.mark.parametrize("worker_id", ["gw-1", "worker 1", ""])
     def test_worker_database_name_rejects_unsafe_worker_ids(self, worker_id: str) -> None:
         with pytest.raises(ValueError, match="Unsafe PostgreSQL identifier"):
             build_worker_database_name(
-                base_database_name="my_site_database_test",
+                base_database_name="competency_trainer_database_test",
                 worker_id=worker_id,
             )
 
@@ -86,23 +86,23 @@ class TestWorkerDatabaseName:
             )
 
     def test_quote_postgresql_identifier_quotes_valid_identifier(self) -> None:
-        assert quote_postgresql_identifier("my_site_database_test_gw0") == (
-            '"my_site_database_test_gw0"'
+        assert quote_postgresql_identifier("competency_trainer_database_test_gw0") == (
+            '"competency_trainer_database_test_gw0"'
         )
 
     def test_quote_postgresql_identifier_rejects_unsafe_identifier(self) -> None:
         with pytest.raises(ValueError, match="Unsafe PostgreSQL identifier"):
-            quote_postgresql_identifier("my-site-database-test")
+            quote_postgresql_identifier("competency-trainer-database-test")
 
 
 class TestTemplateDatabaseName:
     def test_template_database_name_uses_safe_hashed_run_suffix(self) -> None:
         database_name = build_template_database_name(
-            base_database_name="my_site_database_test",
+            base_database_name="competency_trainer_database_test",
             run_id="testrun-20260705",
         )
 
-        assert database_name.startswith("my_site_database_test_template_")
+        assert database_name.startswith("competency_trainer_database_test_template_")
         assert "-" not in database_name
         assert len(database_name.encode("utf-8")) <= 63
         assert quote_postgresql_identifier(database_name) == f'"{database_name}"'
@@ -110,7 +110,7 @@ class TestTemplateDatabaseName:
     def test_template_database_name_rejects_empty_run_id(self) -> None:
         with pytest.raises(ValueError, match="Template database run id must not be blank"):
             build_template_database_name(
-                base_database_name="my_site_database_test",
+                base_database_name="competency_trainer_database_test",
                 run_id="   ",
             )
 

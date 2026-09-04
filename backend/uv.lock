@@ -1284,7 +1284,7 @@ wheels = [
 ]
 
 [[package]]
-name = "my-site-backend"
+name = "competency-trainer-backend"
 version = "1.0.0"
 source = { virtual = "." }
 dependencies = [

@@ -1,4 +1,4 @@
-# My Site Frontend
+# Competency Trainer Frontend
 
 Angular hybrid SSR/CSR frontend for the portfolio and articles site. The frontend is packaged as an independent Docker image and runs the Angular Node.js SSR runtime: public article pages, the public site-build case study, the public updates page, and public competency matrix question pages are server-rendered for SEO, while protected admin content/team workspaces and interactive areas stay hydrated Angular.
 
@@ -30,9 +30,9 @@ Frontend Make targets prepare npm dependencies automatically when `node_modules`
 make build
 ```
 
-The production build is written to `dist/my-site-frontend/browser`.
+The production build is written to `dist/competency-trainer-frontend/browser`.
 
-SSR output is written to `dist/my-site-frontend/server`. To build and run the public SEO HTML smoke check for public article pages, the site-build case study, the updates page, and matrix question pages, run:
+SSR output is written to `dist/competency-trainer-frontend/server`. To build and run the public SEO HTML smoke check for public article pages, the site-build case study, the updates page, and matrix question pages, run:
 
 ```bash
 make ssr-smoke
@@ -52,13 +52,13 @@ Reports are written to `performance/reports/lighthouse/`.
 Build the frontend image from this directory:
 
 ```bash
-docker build -t "my_site_frontend:${IMAGE_TAG:?set IMAGE_TAG}" .
+docker build -t "competency_trainer_frontend:${IMAGE_TAG:?set IMAGE_TAG}" .
 ```
 
 The image uses:
 
 - `node:26.4.0-alpine` to install dependencies and run the Angular production build.
-- `node:26.4.0-alpine` as the production runtime for `dist/my-site-frontend/server/server.mjs`.
+- `node:26.4.0-alpine` as the production runtime for `dist/competency-trainer-frontend/server/server.mjs`.
 - Production dependencies are installed in the runtime stage, then npm/npx and the npm cache are removed from the final image because the server runtime only needs `node`.
 - Explicit runtime environment: `PORT`, `SSR_API_ORIGIN`, `APP_URL_SCHEMA`, `APP_DOMAIN`, and optionally `SSR_PUBLIC_ORIGIN` / `NG_ALLOWED_HOSTS`.
 

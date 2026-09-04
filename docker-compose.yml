@@ -2,7 +2,7 @@ x-backend-build: &backend-build
   build:
     context: ./backend
     dockerfile: Dockerfile
-  image: "my_site_application:${IMAGE_TAG:?IMAGE_TAG must be set}"
+  image: "competency_trainer_application:${IMAGE_TAG:?IMAGE_TAG must be set}"
   user: "10001:10001"
   read_only: true
   cap_drop:
@@ -118,7 +118,7 @@ x-frontend-build: &frontend-build
   build:
     context: ./frontend
     dockerfile: Dockerfile
-  image: "my_site_frontend:${IMAGE_TAG:?IMAGE_TAG must be set}"
+  image: "competency_trainer_frontend:${IMAGE_TAG:?IMAGE_TAG must be set}"
   user: "1000:1000"
   read_only: true
   cap_drop:
@@ -156,7 +156,7 @@ x-process-healthcheck: &process-healthcheck
 services:
   backend-blue:
     <<: *backend-build
-    container_name: my_site_backend_blue
+    container_name: competency_trainer_backend_blue
     command: bash start_application.sh run
     secrets: *agent-access-backend-secrets
     depends_on:
@@ -171,7 +171,7 @@ services:
 
   backend-green:
     <<: *backend-build
-    container_name: my_site_backend_green
+    container_name: competency_trainer_backend_green
     command: bash start_application.sh run
     secrets: *agent-access-backend-secrets
     depends_on:
@@ -210,7 +210,7 @@ services:
   # Keep exactly one scheduler process running; scale workers instead.
   taskiq-scheduler:
     <<: *backend-build
-    container_name: my_site_taskiq_scheduler
+    container_name: competency_trainer_taskiq_scheduler
     command: bash start_application.sh taskiq-scheduler
     depends_on:
       valkey:
@@ -220,7 +220,7 @@ services:
 
   frontend-blue:
     <<: *frontend-build
-    container_name: my_site_frontend_blue
+    container_name: competency_trainer_frontend_blue
     environment:
       - PORT=4000
       - APP_URL_SCHEMA=${APP_URL_SCHEMA}
@@ -232,7 +232,7 @@ services:
 
   frontend-green:
     <<: *frontend-build
-    container_name: my_site_frontend_green
+    container_name: competency_trainer_frontend_green
     environment:
       - PORT=4000
       - APP_URL_SCHEMA=${APP_URL_SCHEMA}
@@ -244,7 +244,7 @@ services:
 
   valkey:
     image: valkey/valkey:9.0.1
-    container_name: my_site_valkey
+    container_name: competency_trainer_valkey
     user: "999:999"
     restart: unless-stopped
     volumes:
@@ -259,7 +259,7 @@ services:
 
   postgres:
     image: postgres:18.4-alpine
-    container_name: my_site_postgres
+    container_name: competency_trainer_postgres
     user: "70:70"
     restart: unless-stopped
     environment:
@@ -283,8 +283,8 @@ services:
     build:
       context: .
       dockerfile: infra/minio/Dockerfile
-    image: "my_site_minio:${IMAGE_TAG:?IMAGE_TAG must be set}"
-    container_name: my_site_minio
+    image: "competency_trainer_minio:${IMAGE_TAG:?IMAGE_TAG must be set}"
+    container_name: competency_trainer_minio
     user: "10002:10002"
     restart: unless-stopped
     environment:
@@ -309,8 +309,8 @@ services:
     build:
       context: .
       dockerfile: infra/nginx/Dockerfile
-    image: "my_site_nginx:${IMAGE_TAG:?IMAGE_TAG must be set}"
-    container_name: my_site_nginx
+    image: "competency_trainer_nginx:${IMAGE_TAG:?IMAGE_TAG must be set}"
+    container_name: competency_trainer_nginx
     user: "101:101"
     restart: always
     read_only: true
@@ -334,7 +334,7 @@ services:
       - ACTIVE_FRONTEND_SLOT=${ACTIVE_FRONTEND_SLOT:-frontend-blue}
       - MINIO_PUBLIC_URL=${MINIO_PUBLIC_URL}
       - NGINX_LIVENESS_FAILURE_LIMIT=12
-    command: ["/usr/local/bin/my-site-nginx-entrypoint"]
+    command: ["/usr/local/bin/competency-trainer-nginx-entrypoint"]
     ports:
       - "80:8080"
       - "443:8443"
@@ -349,14 +349,14 @@ services:
     networks:
       - app-network
     healthcheck:
-      test: ["CMD", "/usr/local/bin/my-site-nginx-healthcheck"]
+      test: ["CMD", "/usr/local/bin/competency-trainer-nginx-healthcheck"]
       interval: 5s
       timeout: 10s
       retries: 12
 
   certbot:
     image: certbot/certbot:v5.2.2
-    container_name: my_site_certbot
+    container_name: competency_trainer_certbot
     profiles:
       - letsencrypt
     volumes:
@@ -380,7 +380,7 @@ services:
 
   cert-sync:
     image: alpine:3.22.2
-    container_name: my_site_cert_sync
+    container_name: competency_trainer_cert_sync
     environment:
       APP_DOMAIN: ${APP_DOMAIN}
     volumes:
@@ -400,7 +400,7 @@ services:
       '
 
   databasus:
-    container_name: my_site_databasus
+    container_name: competency_trainer_databasus
     image: databasus/databasus:v3.47.1
     volumes:
       - databasus_data:/databasus-data

@@ -78,7 +78,7 @@ initialize_ca() {
         -sha256 \
         -key "$root_key" \
         -days 3650 \
-        -subj "/CN=My Site Agent Offline Root CA" \
+        -subj "/CN=Competency Trainer Agent Offline Root CA" \
         -addext "basicConstraints=critical,CA:TRUE,pathlen:1" \
         -addext "keyUsage=critical,keyCertSign,cRLSign" \
         -out "$root_certificate"
@@ -93,7 +93,7 @@ initialize_ca() {
         -new \
         -sha256 \
         -key "$issuing_key" \
-        -subj "/CN=My Site Agent Production Issuing CA" \
+        -subj "/CN=Competency Trainer Agent Production Issuing CA" \
         -out "$issuing_request"
     printf '%s\n' \
         "basicConstraints=critical,CA:TRUE,pathlen:0" \

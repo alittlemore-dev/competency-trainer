@@ -1195,7 +1195,7 @@ MESSAGES: Mapping[LanguageEnum, LanguageMessages] = {
         "enum.articleViewSource.Unknown": "Неизвестный",
     },
     LanguageEnum.EN: {
-        "app.siteName": "My site",
+        "app.siteName": "Competency Trainer",
         "shell.nav.matrix": "Competency matrix",
         "shell.nav.articles": "Articles",
         "shell.nav.adminPanel": "Admin panel",

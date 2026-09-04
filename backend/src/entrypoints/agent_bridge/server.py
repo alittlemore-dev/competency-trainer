@@ -54,7 +54,7 @@ class AgentBridgeServer:
 
     def __post_init__(self) -> None:
         self.server = SanitizedAgentMCPServer(
-            name="my-site matrix authoring bridge",
+            name="competency-trainer matrix authoring bridge",
             instructions=AGENT_BRIDGE_INSTRUCTIONS,
         )
         self._register_tools()

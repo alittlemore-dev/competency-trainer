@@ -1,4 +1,4 @@
-# My Site
+# Competency Trainer
 
 <p align="center">
   <img src="../frontend/public/logo-512x512.png" alt="Project logo" width="180">
@@ -36,7 +36,7 @@ and protected owner/admin/moderator content workspaces.
 ## 📂 Project Structure
 
 ```
-my-site/
+competency-trainer/
 ├── infra/          # nginx reverse proxy, run scripts
 ├── frontend/       # Angular 22 hybrid SSR/CSR (served by its own Node.js image)
 ├── backend/        # Litestar API + domain logic
@@ -71,8 +71,8 @@ my-site/
 
 1. Clone the repository:
 ```bash
-git clone git@github.com:ALittleMoron/my-site.git
-cd my-site
+git clone git@github.com:alittlemore-dev/competency-trainer.git
+cd competency-trainer
 ```
 
 2. Create `.env` file:

@@ -52,9 +52,11 @@ class ResponseCacheConstants:
 
 
 class TaskiqConstants:
-    queue_name: Literal["my_site_background"] = "my_site_background"
-    consumer_group_name: Literal["my_site_background"] = "my_site_background"
-    result_prefix: Literal["my_site_taskiq_results"] = "my_site_taskiq_results"
+    queue_name: Literal["competency_trainer_background"] = "competency_trainer_background"
+    consumer_group_name: Literal["competency_trainer_background"] = "competency_trainer_background"
+    result_prefix: Literal["competency_trainer_taskiq_results"] = (
+        "competency_trainer_taskiq_results"
+    )
     cache_warm_all_task_name: Literal["cache_warm_all"] = "cache_warm_all"
     cache_warm_domain_task_name: Literal["cache_warm_domain"] = "cache_warm_domain"
     manual_cache_warm_task_name: Literal["manual_cache_warm"] = "manual_cache_warm"

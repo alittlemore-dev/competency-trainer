@@ -17,7 +17,7 @@ fi
 ensure_backend_deps
 TEST_ENV_FILE="$env_file"
 if [ "$profile" = "stress" ] && [ "${QUERY_PLANS_REUSE_AVAILABLE_DB:-false}" != "true" ]; then
-    TEST_DB_COMPOSE_PROJECT_NAME="my-site-query-plans-stress"
+    TEST_DB_COMPOSE_PROJECT_NAME="competency-trainer-query-plans-stress"
     stress_db_port="${QUERY_PLANS_STRESS_DB_PORT:-55433}"
     ensure_backend_test_db "docker-compose.query-plans-stress.yml" "$stress_db_port"
 else

@@ -20,8 +20,8 @@ RUN npm ci --omit=dev \
  && rm -rf /root/.npm /usr/local/lib/node_modules/npm /usr/local/bin/npm /usr/local/bin/npx \
  && chown -R node:node /app
 
-COPY --from=builder --chown=node:node /app/dist/my-site-frontend ./dist/my-site-frontend
+COPY --from=builder --chown=node:node /app/dist/competency-trainer-frontend ./dist/competency-trainer-frontend
 
 USER node
 EXPOSE 4000
-CMD ["node", "dist/my-site-frontend/server/server.mjs"]
+CMD ["node", "dist/competency-trainer-frontend/server/server.mjs"]

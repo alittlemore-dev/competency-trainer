@@ -1,4 +1,4 @@
-[mcp_servers.my_site_matrix]
+[mcp_servers.competency_trainer_matrix]
 command = "bash"
 args = ["infra/scripts/agent_bridge.sh"]
 enabled_tools = [
@@ -10,17 +10,17 @@ enabled_tools = [
 ]
 default_tools_approval_mode = "prompt"
 
-[mcp_servers.my_site_matrix.tools.claim_next_matrix_question]
+[mcp_servers.competency_trainer_matrix.tools.claim_next_matrix_question]
 approval_mode = "approve"
 
-[mcp_servers.my_site_matrix.tools.get_matrix_authoring_context]
+[mcp_servers.competency_trainer_matrix.tools.get_matrix_authoring_context]
 approval_mode = "approve"
 
-[mcp_servers.my_site_matrix.tools.search_matrix_resources]
+[mcp_servers.competency_trainer_matrix.tools.search_matrix_resources]
 approval_mode = "approve"
 
-[mcp_servers.my_site_matrix.tools.save_matrix_question_draft]
+[mcp_servers.competency_trainer_matrix.tools.save_matrix_question_draft]
 approval_mode = "approve"
 
-[mcp_servers.my_site_matrix.tools.release_matrix_question_claim]
+[mcp_servers.competency_trainer_matrix.tools.release_matrix_question_claim]
 approval_mode = "approve"

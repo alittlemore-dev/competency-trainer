@@ -292,7 +292,7 @@ def toml_string_values(section: str, field_name: str) -> list[str]:
 
 
 def check_codex_config(config: str) -> None:
-    server = toml_section(config, "mcp_servers.my_site_matrix")
+    server = toml_section(config, "mcp_servers.competency_trainer_matrix")
     require('command = "bash"' in server, "Codex bridge must use the audited local launcher.")
     require(
         'args = ["infra/scripts/agent_bridge.sh"]' in server,
@@ -305,15 +305,15 @@ def check_codex_config(config: str) -> None:
     )
     require('default_tools_approval_mode = "prompt"' in server, "Unknown tools must prompt.")
     require(
-        "[mcp_servers.my_site_matrix.env]" not in config,
+        "[mcp_servers.competency_trainer_matrix.env]" not in config,
         "Codex bridge environment must be owned by the audited local launcher.",
     )
     configured_tools = set(
-        re.findall(r"(?m)^\[mcp_servers\.my_site_matrix\.tools\.([a-z_]+)\]$", config),
+        re.findall(r"(?m)^\[mcp_servers\.competency_trainer_matrix\.tools\.([a-z_]+)\]$", config),
     )
     require(configured_tools == AGENT_CODEX_TOOLS, "Per-tool approvals exceed the allowlist.")
     for tool_name in AGENT_CODEX_TOOLS:
-        tool = toml_section(config, f"mcp_servers.my_site_matrix.tools.{tool_name}")
+        tool = toml_section(config, f"mcp_servers.competency_trainer_matrix.tools.{tool_name}")
         require(
             tool.strip() == 'approval_mode = "approve"',
             f"Codex tool {tool_name} must be explicitly approved.",

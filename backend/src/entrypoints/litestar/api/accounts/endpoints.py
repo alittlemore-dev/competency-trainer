@@ -35,6 +35,8 @@ from entrypoints.litestar.api.accounts.schemas import (
 from entrypoints.litestar.api.parameters import SessionIdPath, UsernamePath, api_json_body
 from entrypoints.litestar.guards import team_manager_guard
 
+_OPENAPI_PASSWORD_EXAMPLE = "string"  # noqa: S105  # nosec B105
+
 
 class AdminAccountsApiController(Controller):
     path = "/accounts"
@@ -72,7 +74,7 @@ class AdminAccountsApiController(Controller):
                 examples=(
                     {
                         "username": "moderator",
-                        "password": "string",
+                        "password": _OPENAPI_PASSWORD_EXAMPLE,
                         "role": "moderator",
                         "isActive": True,
                     },
@@ -263,7 +265,7 @@ class AdminAccountsApiController(Controller):
             api_json_body(
                 title="Managed account password update request",
                 description="Replacement password for the managed account.",
-                examples=({"password": "string"},),
+                examples=({"password": _OPENAPI_PASSWORD_EXAMPLE},),
             ),
         ],
         request: Request[JwtUser, Token | None, State],

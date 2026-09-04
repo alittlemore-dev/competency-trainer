@@ -164,7 +164,7 @@ chain, install them using one of the two modes below.
 The repository's `.codex/config.toml` starts the local stdio module with:
 
 ```toml
-[mcp_servers.my_site_matrix]
+[mcp_servers.competency_trainer_matrix]
 command = "bash"
 args = ["infra/scripts/agent_bridge.sh"]
 enabled_tools = [

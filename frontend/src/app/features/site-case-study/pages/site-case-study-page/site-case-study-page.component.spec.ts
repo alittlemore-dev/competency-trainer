@@ -66,7 +66,7 @@ describe('SiteCaseStudyPageComponent', () => {
   it('renders the public case-study content and source-code CTA', () => {
     const pageText = fixture.nativeElement.textContent as string;
     const sourceLink = fixture.nativeElement.querySelector(
-      'a[href="https://github.com/ALittleMoron/my-site"]',
+      'a[href="https://github.com/alittlemore-dev/competency-trainer"]',
     ) as HTMLAnchorElement | null;
 
     expect(pageText).toContain('Как устроен этот сайт');

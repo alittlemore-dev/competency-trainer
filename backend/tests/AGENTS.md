@@ -35,7 +35,7 @@ semantics.
 - Cover success, failure, security, transaction, and concurrency paths in integration tests when the
   behavior specifically requires real PostgreSQL or middleware. Keep isolated branch logic in unit
   tests.
-- Real PostgreSQL test DB (`my_site_database_test`) — tests under `backend/tests/integration/`
+- Real PostgreSQL test DB (`competency_trainer_database_test`) — tests under `backend/tests/integration/`
   are auto-migrated to `heads` via their package conftest.
 - Inherit `StorageTestCase` for DB assertion helpers; session auto-rollbacks after each test.
 - Alembic migration tests live outside `integration/` under `backend/tests/migrations/`, with one
@@ -81,7 +81,7 @@ forces that exact worker count.
 
 `make test-unit` runs only `backend/tests/unit/` and must not require a test database. Integration
 pytest workers clone a migrated run-scoped template database into isolated PostgreSQL databases
-named from the base database plus the xdist worker suffix, such as `my_site_database_test_gw0`.
+named from the base database plus the xdist worker suffix, such as `competency_trainer_database_test_gw0`.
 Alembic migration tests must stay serial because they exercise upgrade/downgrade behavior against
 the shared base schema.
 

@@ -7,9 +7,9 @@ class TestValidateTestDatabaseName:
     @pytest.mark.parametrize(
         "database_name",
         [
-            "my_site_database_test",
-            "my_site_database_test_gw0",
-            "my_site_database_test_template_abcd1234",
+            "competency_trainer_database_test",
+            "competency_trainer_database_test_gw0",
+            "competency_trainer_database_test_template_abcd1234",
         ],
     )
     def test_allows_test_database_names(self, database_name: str) -> None:
@@ -19,7 +19,7 @@ class TestValidateTestDatabaseName:
         "database_name",
         [
             "postgres",
-            "my_site_database",
+            "competency_trainer_database",
             "production_testimony",
         ],
     )

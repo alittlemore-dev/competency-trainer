@@ -11,7 +11,7 @@
   },
   "newProjectRoot": "projects",
   "projects": {
-    "my-site-frontend": {
+    "competency-trainer-frontend": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:component": {
@@ -47,7 +47,7 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
-            "outputPath": "dist/my-site-frontend",
+            "outputPath": "dist/competency-trainer-frontend",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "server": "src/main.server.ts",
@@ -113,10 +113,10 @@
           "builder": "@angular/build:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "my-site-frontend:build:production"
+              "buildTarget": "competency-trainer-frontend:build:production"
             },
             "development": {
-              "buildTarget": "my-site-frontend:build:development"
+              "buildTarget": "competency-trainer-frontend:build:development"
             }
           },
           "defaultConfiguration": "development"

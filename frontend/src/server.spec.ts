@@ -189,7 +189,7 @@ describe('SSR Express server', () => {
   });
 
   it('serves hashed JavaScript and CSS with immutable cache headers', async () => {
-    const browserDistFolder = mkdtempSync(join(tmpdir(), 'my-site-browser-dist-'));
+    const browserDistFolder = mkdtempSync(join(tmpdir(), 'competency-trainer-browser-dist-'));
     writeFileSync(join(browserDistFolder, 'main-ABCDEFGH.js'), 'console.log("ok");');
     writeFileSync(join(browserDistFolder, 'styles-ABCDEFGH.css'), 'body{}');
     const angularApp: AngularSsrEngine = {
@@ -223,7 +223,7 @@ describe('SSR Express server', () => {
   });
 
   it('serves stable public asset filenames with bounded non-immutable cache headers', async () => {
-    const browserDistFolder = mkdtempSync(join(tmpdir(), 'my-site-browser-dist-'));
+    const browserDistFolder = mkdtempSync(join(tmpdir(), 'competency-trainer-browser-dist-'));
     writeFileSync(join(browserDistFolder, 'logo-192x192.webp'), 'image');
     const angularApp: AngularSsrEngine = {
       handle: jest.fn().mockRejectedValue(new Error('Angular should not handle static assets')),

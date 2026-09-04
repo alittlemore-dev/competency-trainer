@@ -311,13 +311,13 @@ export_test_runtime_environment() {
     export DB_HOST="postgres"
     export DB_LOG_QUERY_METRICS="false"
     export DB_MAX_OVERFLOW="20"
-    export DB_NAME="my_site_database"
+    export DB_NAME="competency_trainer_database"
     export DB_POOL_PRE_PING="true"
     export DB_POOL_SIZE="10"
     export DB_PORT="5432"
     export DB_SLOW_QUERY_LOG_STATEMENT_MAX_LENGTH="1000"
     export DB_SLOW_QUERY_LOG_THRESHOLD_MS="250"
-    export DB_USER="my_site"
+    export DB_USER="competency_trainer"
     export FILES_ORPHAN_RETENTION_SECONDS="604800"
     export I18N_DEFAULT_LANGUAGE="ru"
     export LE_EMAIL="ops@example.test"
@@ -445,10 +445,10 @@ run_deploy_env_configuration_check() {
 
     require_file_not_contains "$compose_file" "\${DOCKER_REGISTRY}" "runtime Docker registry interpolation"
     require_file_not_contains "$compose_file" "\${DOCKER_USERNAME}" "runtime Docker username interpolation"
-    require_file_contains "$compose_file" 'image: "my_site_application:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local backend image tag"
-    require_file_contains "$compose_file" 'image: "my_site_frontend:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local frontend image tag"
-    require_file_contains "$compose_file" 'image: "my_site_minio:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local MinIO image tag"
-    require_file_contains "$compose_file" 'image: "my_site_nginx:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local nginx image tag"
+    require_file_contains "$compose_file" 'image: "competency_trainer_application:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local backend image tag"
+    require_file_contains "$compose_file" 'image: "competency_trainer_frontend:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local frontend image tag"
+    require_file_contains "$compose_file" 'image: "competency_trainer_minio:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local MinIO image tag"
+    require_file_contains "$compose_file" 'image: "competency_trainer_nginx:${IMAGE_TAG:?IMAGE_TAG must be set}"' "required local nginx image tag"
     require_no_latest_image_tags \
         "$compose_file" \
         "$backend_image_workflow" \
@@ -659,7 +659,7 @@ run_healthcheck_configuration_check() {
     require_file_contains "$nginx_template" "resolver 127.0.0.11" "Docker DNS resolver"
     require_file_contains "$nginx_entrypoint" "Rendered nginx configuration is empty." "fail-closed nginx rendering"
     require_file_contains "$nginx_entrypoint" "mv \"\$temporary_file\" \"\$rendered_file\"" "atomic nginx configuration switch"
-    require_file_contains "$compose_file" 'command: ["/usr/local/bin/my-site-nginx-entrypoint"]' "nginx entrypoint command"
+    require_file_contains "$compose_file" 'command: ["/usr/local/bin/competency-trainer-nginx-entrypoint"]' "nginx entrypoint command"
     require_file_contains "$nginx_template" "server \${ACTIVE_BACKEND_SLOT}:8080 resolve;" "active backend slot"
     require_file_contains "$nginx_template" "server \${ACTIVE_FRONTEND_SLOT}:4000 resolve;" "active frontend slot"
     require_file_contains "$nginx_template" "connect-src 'self' \${MINIO_PUBLIC_URL}" "public MinIO file CSP"
@@ -808,7 +808,7 @@ run_agent_ca_helper_check() {
 run_minio_image_check() {
     require_command docker
 
-    minio_check_image_tag="my-site-minio-security-check:$(date +%s)-$$"
+    minio_check_image_tag="competency-trainer-minio-security-check:$(date +%s)-$$"
     minio_check_temp_dir="$(mktemp -d)"
     trap cleanup_security_check_images EXIT
 
@@ -942,11 +942,11 @@ run_nginx_syntax_check() {
     material_dir="${nginx_check_temp_dir}/material"
     rendered_env="${nginx_check_temp_dir}/runtime.env"
     compose_secrets_dir="${nginx_check_temp_dir}/compose-secrets"
-    nginx_check_image_tag="my-site-nginx-security-check:$(date +%s)-$$"
-    agent_api_check_image_tag="my-site-backend-agent-edge-check:$(date +%s)-$$"
-    nginx_check_container_name="my-site-nginx-agent-api-check-$(date +%s)-$$"
-    agent_api_probe_container_name="my-site-agent-api-probe-$(date +%s)-$$"
-    nginx_check_network_name="my-site-agent-api-edge-check-$(date +%s)-$$"
+    nginx_check_image_tag="competency-trainer-nginx-security-check:$(date +%s)-$$"
+    agent_api_check_image_tag="competency-trainer-backend-agent-edge-check:$(date +%s)-$$"
+    nginx_check_container_name="competency-trainer-nginx-agent-api-check-$(date +%s)-$$"
+    agent_api_probe_container_name="competency-trainer-agent-api-probe-$(date +%s)-$$"
+    nginx_check_network_name="competency-trainer-agent-api-edge-check-$(date +%s)-$$"
     mkdir -p "$cert_dir" "$compose_secrets_dir"
     trap cleanup_security_check_images EXIT
 
@@ -1097,7 +1097,7 @@ run_nginx_syntax_check() {
 
     for attempt in 1 2 3 4 5; do
         if docker exec "$nginx_check_container_name" \
-            /usr/local/bin/my-site-nginx-healthcheck >/dev/null 2>&1; then
+            /usr/local/bin/competency-trainer-nginx-healthcheck >/dev/null 2>&1; then
             break
         fi
         if [ "$attempt" -eq 5 ]; then
@@ -1317,7 +1317,7 @@ run_nginx_recovery_check() {
     local attempt
     local restart_count
 
-    nginx_recovery_container_name="my-site-nginx-recovery-check-$(date +%s)-$$"
+    nginx_recovery_container_name="competency-trainer-nginx-recovery-check-$(date +%s)-$$"
     docker run -d \
         --name "$nginx_recovery_container_name" \
         --restart always \
@@ -1333,7 +1333,7 @@ run_nginx_recovery_check() {
 
     sleep 11
     if docker exec "$nginx_recovery_container_name" \
-        /usr/local/bin/my-site-nginx-healthcheck >/dev/null 2>&1; then
+        /usr/local/bin/competency-trainer-nginx-healthcheck >/dev/null 2>&1; then
         echo "Nginx recovery probe unexpectedly succeeded without a local nginx listener." >&2
         exit 1
     fi
@@ -1343,7 +1343,7 @@ run_nginx_recovery_check() {
     fi
 
     docker exec "$nginx_recovery_container_name" \
-        /usr/local/bin/my-site-nginx-healthcheck >/dev/null 2>&1 || true
+        /usr/local/bin/competency-trainer-nginx-healthcheck >/dev/null 2>&1 || true
     for attempt in 1 2 3 4 5; do
         restart_count="$(docker inspect -f '{{.RestartCount}}' "$nginx_recovery_container_name")"
         if [ "$restart_count" -ge 1 ] \

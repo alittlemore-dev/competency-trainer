@@ -12,7 +12,7 @@ def test_database_settings_load_from_database_environment(
         "DB_DRIVER": "postgresql+psycopg",
         "DB_HOST": "postgres",
         "DB_PORT": "5432",
-        "DB_NAME": "my_site_database",
+        "DB_NAME": "competency_trainer_database",
         "DB_POOL_PRE_PING": "true",
         "DB_POOL_SIZE": "10",
         "DB_MAX_OVERFLOW": "20",
@@ -28,5 +28,5 @@ def test_database_settings_load_from_database_environment(
     assert settings.user == "postgres"
     assert settings.port == "5432"
     assert settings.url.get_secret_value() == (
-        "postgresql+psycopg://postgres:postgres-password@postgres:5432/my_site_database"
+        "postgresql+psycopg://postgres:postgres-password@postgres:5432/competency_trainer_database"
     )

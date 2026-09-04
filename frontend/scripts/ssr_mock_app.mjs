@@ -6,7 +6,7 @@ import { gzipSync } from 'node:zlib';
 const scriptDir = dirname(fileURLToPath(import.meta.url));
 const frontendRoot = resolve(scriptDir, '..');
 const defaultServerEntry = pathToFileURL(
-  resolve(frontendRoot, 'dist/my-site-frontend/server/server.mjs'),
+  resolve(frontendRoot, 'dist/competency-trainer-frontend/server/server.mjs'),
 ).href;
 const ARTICLE_COVER_PATH = '/api/fixtures/article-cover.svg';
 const ARTICLE_COVER_SVG =
@@ -518,7 +518,7 @@ function articleSummary(req) {
 
 function buildMessages() {
   return {
-    'app.siteName': 'My site',
+    'app.siteName': 'Competency Trainer',
     'shell.nav.matrix': 'Matrix',
     'shell.nav.articles': 'Articles',
     'shell.nav.toggleNavigation': 'Toggle navigation',

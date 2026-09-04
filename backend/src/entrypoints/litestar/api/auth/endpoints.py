@@ -24,6 +24,8 @@ from entrypoints.litestar.api.auth.schemas import AccessTokenResponseSchema, Log
 from entrypoints.litestar.api.parameters import api_json_body
 from infra.config.constants import constants
 
+_OPENAPI_PASSWORD_EXAMPLE = "string"  # noqa: S105  # nosec B105
+
 
 def require_auth_cookie_csrf_guard(request: Request) -> None:
     csrf_guard = request.headers.get(constants.auth.csrf_guard_header_name)
@@ -121,7 +123,7 @@ class AuthApiController(Controller):
             api_json_body(
                 title="Login request",
                 description="Username and password used to create a PASETO access token.",
-                examples=({"username": "moderator", "password": "string"},),
+                examples=({"username": "moderator", "password": _OPENAPI_PASSWORD_EXAMPLE},),
             ),
         ],
         use_case: FromDishka[AuthUseCase],

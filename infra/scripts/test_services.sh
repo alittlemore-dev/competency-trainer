@@ -6,7 +6,7 @@ test_services_repo_dir="$(cd -- "${test_services_script_dir}/../.." && pwd)"
 TEST_DB_OWNED="${TEST_DB_OWNED:-0}"
 TEST_DB_ENV_FILE=""
 TEST_DB_COMPOSE_FILE=""
-TEST_DB_COMPOSE_PROJECT_NAME="${TEST_DB_COMPOSE_PROJECT_NAME:-my-site-test}"
+TEST_DB_COMPOSE_PROJECT_NAME="${TEST_DB_COMPOSE_PROJECT_NAME:-competency-trainer-test}"
 
 resolve_path_from() {
     local base_dir="$1"

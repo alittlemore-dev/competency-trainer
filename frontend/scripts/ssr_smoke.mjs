@@ -114,7 +114,10 @@ async function assertSiteBuildCaseStudyHtml(frontendPort, requests) {
       html.includes('Engineering case study of a production-minded portfolio and articles site.'),
     ],
     ['architecture', html.includes('Angular hybrid SSR/CSR and backend-driven i18n.')],
-    ['source code CTA', html.includes('href="https://github.com/ALittleMoron/my-site"')],
+    [
+      'source code CTA',
+      html.includes('href="https://github.com/alittlemore-dev/competency-trainer"'),
+    ],
     [
       'canonical',
       html.includes(`href="http://127.0.0.1:${frontendPort}/ru/how-this-site-is-built"`),

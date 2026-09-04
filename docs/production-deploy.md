@@ -345,8 +345,8 @@ recovery path needs neither a Docker socket mount nor a privileged watchdog cont
 After deployment, verify the applied state with:
 
 ```bash
-docker inspect my_site_nginx \
+docker inspect competency_trainer_nginx \
   --format 'restart={{.HostConfig.RestartPolicy.Name}} status={{.State.Status}} health={{.State.Health.Status}} restarts={{.RestartCount}}'
-docker inspect my_site_nginx \
+docker inspect competency_trainer_nginx \
   --format '{{range .State.Health.Log}}{{println .End "exit=" .ExitCode .Output}}{{end}}'
 ```

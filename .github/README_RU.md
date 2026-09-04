@@ -36,7 +36,7 @@
 ## 📂 Структура проекта
 
 ```
-my-site/
+competency-trainer/
 ├── infra/          # nginx reverse proxy, скрипты запуска
 ├── frontend/       # Angular 22 hybrid SSR/CSR (собственный Node.js-образ)
 ├── backend/        # Litestar API + доменная логика
@@ -72,8 +72,8 @@ my-site/
 
 1. Клонировать репозиторий:
 ```bash
-git clone git@github.com:ALittleMoron/my-site.git
-cd my-site
+git clone git@github.com:alittlemore-dev/competency-trainer.git
+cd competency-trainer
 ```
 
 2. Создать файл `.env`:

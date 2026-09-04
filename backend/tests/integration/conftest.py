@@ -39,7 +39,7 @@ from infra.postgresql.query_monitoring import install_query_monitoring
 from infra.postgresql.utils import downgrade, migrate
 from scripts.pytest_parallel import build_template_database_name, quote_postgresql_identifier
 
-_BASE_TEST_DATABASE_NAME = "my_site_database_test"
+_BASE_TEST_DATABASE_NAME = "competency_trainer_database_test"
 _TEMPLATE_DATABASE_RUN_ID_ENV = "BACKEND_PYTEST_DB_TEMPLATE_ID"
 
 

@@ -1,7 +1,7 @@
 [project]
-name = "my-site-backend"
+name = "competency-trainer-backend"
 version = "1.0.0"
-description = "My site backend"
+description = "Competency Trainer backend"
 authors = [{ name = "Dmitriy Lunev", email = "d.lunev.dev@gmail.com" }]
 requires-python = "==3.14.*,<4.0"
 readme = "README.md"

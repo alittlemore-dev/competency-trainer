@@ -25,7 +25,7 @@ def test_settings(worker_id: str) -> Generator[Settings]:
     original_use_cache = settings.app.use_cache
     original_database_name = settings.database.name
     settings.database.name = build_worker_database_name(
-        base_database_name="my_site_database_test",
+        base_database_name="competency_trainer_database_test",
         worker_id=worker_id,
     )
     settings.app.use_cache = False

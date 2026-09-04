@@ -6,7 +6,7 @@ RUN rm -f /etc/nginx/conf.d/default.conf
 
 COPY --chown=nginx:nginx infra/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY --chown=nginx:nginx infra/nginx/templates/ /etc/nginx/runtime-templates/
-COPY --chown=nginx:nginx --chmod=755 infra/nginx/entrypoint.sh /usr/local/bin/my-site-nginx-entrypoint
-COPY --chown=nginx:nginx --chmod=755 infra/nginx/healthcheck.sh /usr/local/bin/my-site-nginx-healthcheck
+COPY --chown=nginx:nginx --chmod=755 infra/nginx/entrypoint.sh /usr/local/bin/competency-trainer-nginx-entrypoint
+COPY --chown=nginx:nginx --chmod=755 infra/nginx/healthcheck.sh /usr/local/bin/competency-trainer-nginx-healthcheck
 
 USER nginx
