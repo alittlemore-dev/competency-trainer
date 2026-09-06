@@ -76,6 +76,12 @@ describe('SiteFooterComponent', () => {
     expect(link).not.toBeNull();
   });
 
+  it('renders source code link to the GitHub organization', () => {
+    const link = el.querySelector('a[href="https://github.com/alittlemore-dev"]');
+    expect(link).not.toBeNull();
+    expect(link?.textContent?.trim()).toBe('Исходный код');
+  });
+
   it('renders localized source and social labels', () => {
     expect(el.textContent).toContain('Исходный код');
     expect(el.querySelector('a[aria-label="Профиль GitHub"]')).not.toBeNull();
