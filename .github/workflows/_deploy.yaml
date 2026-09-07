@@ -38,7 +38,7 @@ jobs:
           cp -a Makefile docker-compose.yml backend/ frontend/ infra/ .env .deploy-payload/
 
       - name: Sync runtime files to server
-        uses: burnett01/rsync-deployments@9.0.0
+        uses: burnett01/rsync-deployments@9.0.1
         with:
           switches: >-
             -avzr --delete
