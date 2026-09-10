@@ -51,26 +51,32 @@ class TestSeoDiscoveryAPI(ApiTestCase):
         assert "<loc>http://localhost:8000/en/how-this-site-is-built</loc>" in sitemap
         assert "<loc>http://localhost:8000/ru/updates</loc>" in sitemap
         assert "<loc>http://localhost:8000/en/updates</loc>" in sitemap
-        assert "<loc>http://localhost:8000/ru/articles/typed-articles</loc>" in sitemap
-        assert "<loc>http://localhost:8000/en/articles/typed-articles</loc>" in sitemap
+        assert "<loc>http://localhost:8000/ru/competency/articles/typed-articles</loc>" in sitemap
+        assert "<loc>http://localhost:8000/en/competency/articles/typed-articles</loc>" in sitemap
         assert (
-            "<loc>http://localhost:8000/ru/competency-matrix/questions/how-to-write-function</loc>"
+            "<loc>http://localhost:8000/ru/competency/matrix/questions/how-to-write-function</loc>"
             in sitemap
         )
         assert (
-            "<loc>http://localhost:8000/en/competency-matrix/questions/how-to-write-function</loc>"
+            "<loc>http://localhost:8000/en/competency/matrix/questions/how-to-write-function</loc>"
             in sitemap
         )
-        assert 'hreflang="ru" href="http://localhost:8000/ru/articles/typed-articles"' in sitemap
-        assert 'hreflang="en" href="http://localhost:8000/en/articles/typed-articles"' in sitemap
+        assert (
+            'hreflang="ru" href="http://localhost:8000/ru/competency/articles/typed-articles"'
+            in sitemap
+        )
+        assert (
+            'hreflang="en" href="http://localhost:8000/en/competency/articles/typed-articles"'
+            in sitemap
+        )
         assert (
             'hreflang="ru" '
-            'href="http://localhost:8000/ru/competency-matrix/questions/how-to-write-function"'
+            'href="http://localhost:8000/ru/competency/matrix/questions/how-to-write-function"'
             in sitemap
         )
         assert (
             'hreflang="en" '
-            'href="http://localhost:8000/en/competency-matrix/questions/how-to-write-function"'
+            'href="http://localhost:8000/en/competency/matrix/questions/how-to-write-function"'
             in sitemap
         )
         assert "<lastmod>2026-02-04T04:05:06+00:00</lastmod>" in sitemap
@@ -121,6 +127,7 @@ class TestSeoDiscoveryAPI(ApiTestCase):
             "Disallow: /updates\n"
             "Disallow: /articles\n"
             "Disallow: /competency-matrix\n"
+            "Disallow: /competency\n"
             "Disallow: /sitemap\n"
             "Sitemap: http://localhost:8000/sitemap.xml\n"
         )

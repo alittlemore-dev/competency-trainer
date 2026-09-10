@@ -40,7 +40,7 @@ class PublicDiscoveryUrls:
         ]
         urls.extend(
             PublicUrl(
-                path=f"/{language.value}/articles/{article.slug}",
+                path=f"/{language.value}/competency/articles/{article.slug}",
                 updated_at=article.updated_at.isoformat(),
             )
             for article in self.articles
@@ -49,7 +49,7 @@ class PublicDiscoveryUrls:
         )
         urls.extend(
             PublicUrl(
-                path=f"/{language.value}/competency-matrix/questions/{item.slug}",
+                path=f"/{language.value}/competency/matrix/questions/{item.slug}",
                 updated_at=None,
             )
             for item in self.matrix_items
@@ -112,6 +112,7 @@ class RobotsTxt:
             "Disallow: /updates\n"
             "Disallow: /articles\n"
             "Disallow: /competency-matrix\n"
+            "Disallow: /competency\n"
             "Disallow: /sitemap\n"
             f"Sitemap: {settings.app.get_url('/sitemap.xml')}\n"
         )
